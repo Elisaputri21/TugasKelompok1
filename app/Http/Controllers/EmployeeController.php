@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\Position;
 
 class EmployeeController extends Controller
 {
@@ -39,12 +40,9 @@ class EmployeeController extends Controller
         $pageTitle = 'Create Employee';
 
         // RAW SQL Query
-        // $positions = DB::select('select * from positions');
+        $positions = DB::select('select * from positions');
 
-        // QUERY BUILDER
-        $positions = DB::table('positions')->get();
-
-        return view('employee.create', compact('pageTitle' , 'positions'));
+        return view('employee.create', compact('pageTitle', 'positions'));
     }
 
     /**
@@ -52,32 +50,33 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-    $messages = [
-        'required' => ':Attribute harus diisi.',
-        'email' => 'Isi :attribute dengan format yang benar',
-        'numeric' => 'Isi :attribute dengan angka'
-    ];
-    $validator = Validator::make($request->all(), [
-        'firstName' => 'required',
-        'lastName' => 'required',
-        'email' => 'required|email',
-        'age' => 'required|numeric',
-    ], $messages);
+        $messages = [
+            'required' => ':Attribute harus diisi.',
+            'email' => 'Isi :attribute dengan format yang benar',
+            'numeric' => 'Isi :attribute dengan angka'
+        ];
 
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
+        $validator = Validator::make($request->all(), [
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'email' => 'required|email',
+            'age' => 'required|numeric',
+        ], $messages);
 
-    // INSERT QUERY
-    DB::table('employees')->insert([
-        'firstname' => $request->firstName,
-        'lastname' => $request->lastName,
-        'email' => $request->email,
-        'age' => $request->age,
-        'position_id' => $request->position,
-    ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-    return redirect()->route('employees.index');
+        // ELOQUENT
+        $employee = New Employee;
+        $employee->firstname = $request->firstName;
+        $employee->lastname = $request->lastName;
+        $employee->email = $request->email;
+        $employee->age = $request->age;
+        $employee->position_id = $request->position;
+        $employee->save();
+
+        return redirect()->route('employees.index');
     }
 
     /**

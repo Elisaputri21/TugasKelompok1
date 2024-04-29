@@ -95,24 +95,39 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @error('position')
+                            <div class="text-danger"><small>{{ $message }}</small></div>
+                            @enderror
                         </div>
-
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-6 d-grid">
-                            <a href="{{ route('employees.index') }}" class="btn btn-outline-dark btn-lg mt-3"><i
-                                    class="bi-arrow-left-circle me-2"></i> Cancel</a>
+                            <a href="{{ route('employees.index') }}"
+                                class="btn btn-outline-dark btn-lg mt-3"><i class="bi-arrow-left-circle me-2"></i> Cancel</a>
                         </div>
                         <div class="col-md-6 d-grid">
-                            <button type="submit" class="btn btn-dark btn-lg mt-3"><i class="bi-check-circle me-2"></i>
-                                Save</button>
+                            <button type="submit" class="btn btn-dark btn-lg mt-3"><i class="bi-check-circle me-2"></i> Edit</button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
+</div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6 d-grid">
+            <a href="{{ route('employees.index') }}" class="btn btn-outline-dark btn-lg mt-3"><i class="bi-arrow-left-circle me-2"></i> Cancel</a>
+        </div>
+        <div class="col-md-6 d-grid">
+            <button type="submit" class="btn btn-dark btn-lg mt-3"><i class="bi-check-circle me-2"></i>Save</button>
+        </div>
+    </div>
+</div>
+</div>
+</form>
+</div>
     @vite('resources/js/app.js')
 </body>
 

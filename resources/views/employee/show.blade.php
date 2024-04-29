@@ -35,6 +35,8 @@ btn-outline-light my-2 ms-md-auto"><i
             </div>
         </div>
     </nav>
+    @extend('layouts.app')
+    @section('content')
     <div class="container-sm my-5">
         <div class="row justify-content-center">
             <div class="p-5 bg-light rounded-3 col-xl-4 border">
@@ -45,13 +47,11 @@ btn-outline-light my-2 ms-md-auto"><i
                 <hr>
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <label for="firstName" class="form-label">First
-                            Name</label>
+                        <label for="firstName" class="form-label">FirstName</label>
                         <h5>{{ $employee->firstname }}</h5>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="lastName" class="form-label">Last
-                            Name</label>
+                        <label for="lastName" class="form-label">LastName</label>
                         <h5>{{ $employee->lastname }}</h5>
                     </div>
                     <div class="col-md-12 mb-3">

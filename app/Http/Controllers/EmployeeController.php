@@ -95,12 +95,14 @@ class EmployeeController extends Controller
         // [$id]))->first();
 
         // QUERY BUILDER
-        $employee = DB::table('employees')
-            ->select('employees.*', 'positions.name as position_name')
-            ->leftJoin('positions', 'employees.position_id', '=', 'positions.id')
-            ->where('employees.id', $id)
-            ->first();
+        // $employee = DB::table('employees')
+        //     ->select('employees.*', 'positions.name as position_name')
+        //     ->leftJoin('positions', 'employees.position_id', '=', 'positions.id')
+        //     ->where('employees.id', $id)
+        //     ->first();
 
+        // Eloquent Query
+        $employee = Employee::find($id);
         return view('employee.show', compact('pageTitle', 'employee'));
     }
 

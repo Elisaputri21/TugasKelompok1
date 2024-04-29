@@ -155,12 +155,9 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        // QUERY BUILDER
-        DB::table('employees')
-            ->where('id', $id)
-            ->delete();
+        // ELOQUENT
+        Employee::find($id)->delete();
 
         return redirect()->route('employees.index');
-
     }
 }

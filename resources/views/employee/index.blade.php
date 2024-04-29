@@ -28,8 +28,7 @@ initial-scale=1.0">
                             List</a></li>
                 </ul>
                 <hr class="d-lg-none text-white-50">
-                <a href="{{ route('profile') }}" class="btn
-btn-outline-light my-2 ms-md-auto"><i
+                <a href="{{ route('profile') }}" class="btn btn-outline-light my-2 ms-md-auto"><i
                         class="bi-person-circle me-1"></i>
                     My Profile</a>
             </div>
@@ -73,6 +72,25 @@ btn-outline-light my-2 ms-md-auto"><i
                                 <td>{{ $employee->age }}</td>
                                 <td>{{ $employee->position->name }}</td>
                                 <td>@include('employee.actions')</td>
+                                <td>
+                                    {{--ACTIONS SECTION--}}
+                                    <div class="d-flex">
+                                        <a href="{{ route('employees.show', ['employee' =>$employee->id]) }}" class="btn btn-outline-dark btn-sm me-2"><iclass="bi-person-lines-fill"></i></a>
+                                            <a href="{{ route('employees.edit', ['employee' =>$employee->id]) }}" class="btn btn-outline-dark btn-sm me-2"><i class="bi-pencil-square"></i></a>
+                                            
+                                            <div>
+                                                <form action="{{ route('employees.destroy',['employee' => $employee->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-outline-dark btn-sm me-2"><i class="bi-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </td>
+                                        </tr>
+                                            @endforeach
+                                        </tbody
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
